@@ -18,6 +18,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -26,6 +29,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1nddC9PlzvVM7K43dTqbmIWs93l" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -96,38 +100,46 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="142" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612244398304" />
-    <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1612282604735">
+    <state x="551" y="264" key="Github.ShareDialog" timestamp="1612283001862">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282604735" />
-    <state width="1323" height="223" key="GridCell.Tab.0.center" timestamp="1612282604735">
+    <state x="551" y="264" key="Github.ShareDialog/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612283001862" />
+    <state x="444" y="64" key="Github.UntrackedFilesDialog" timestamp="1612283018962">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282604735" />
-    <state width="1323" height="223" key="GridCell.Tab.0.left" timestamp="1612282604735">
+    <state x="444" y="64" key="Github.UntrackedFilesDialog/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612283018962" />
+    <state width="1323" height="152" key="GridCell.Tab.0.bottom" timestamp="1612282965078">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282604735" />
-    <state width="1323" height="223" key="GridCell.Tab.0.right" timestamp="1612282604735">
+    <state width="1323" height="152" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282965078" />
+    <state width="1323" height="152" key="GridCell.Tab.0.center" timestamp="1612282965078">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282604735" />
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1612282580233">
+    <state width="1323" height="152" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282965078" />
+    <state width="1323" height="152" key="GridCell.Tab.0.left" timestamp="1612282965077">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282580233" />
-    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1612282580233">
+    <state width="1323" height="152" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282965077" />
+    <state width="1323" height="152" key="GridCell.Tab.0.right" timestamp="1612282965078">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282580233" />
-    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1612282580233">
+    <state width="1323" height="152" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282965078" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1612282677675">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282580233" />
-    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1612282580233">
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282677675" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1612282677674">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282580233" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282677674" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1612282677674">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282677674" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1612282677675">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612282677675" />
     <state x="69" y="27" key="new project wizard" timestamp="1611765158412">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -144,11 +156,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/client/SocketServerService.java</url>
           <line>35</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/client/MyClient.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/client/MyClient.java</url>
