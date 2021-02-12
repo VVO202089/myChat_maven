@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyServer {
-    public static final int PORT = 8085;
+    public static final int PORT = 8081;
 
     private List<ClientHandler> clients;
     private AuthService authService;

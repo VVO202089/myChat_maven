@@ -1,6 +1,7 @@
 package client;
 
 import server.Message;
+import server.Registration;
 
 import javax.accessibility.AccessibleRole;
 import javax.swing.*;
@@ -63,9 +64,23 @@ public class MyClient extends JFrame {
         login.setToolTipText("Логин");
         JPasswordField password = new JPasswordField();
         password.setToolTipText("Пароль");
+        JButton regButton = new JButton("Регистрация");
         JButton authButton = new JButton("Авторизоваться");
 
+        // регистрация
+        regButton.addActionListener(actionEvent ->{
+            String lgn = login.getText();
+            String psw = new String(password.getPassword());
+
+            if(lgn!=null && psw!=null && !lgn.isEmpty() && !psw.isEmpty()){
+                Registration reg = new Registration(lgn,psw);
+                reg.registrationUsers();
+            }
+
+        });
+
         JLabel authLabel = new JLabel("Offline");
+        // авторизация
         authButton.addActionListener(actionEvent -> {
             String lgn = login.getText();
             String psw = new String(password.getPassword());
@@ -102,8 +117,10 @@ public class MyClient extends JFrame {
             }
         });
 
+        // добавление элементов на форму
         add(login);
         add(password);
+        add(regButton);
         add(authButton);
         add(authLabel);
 
