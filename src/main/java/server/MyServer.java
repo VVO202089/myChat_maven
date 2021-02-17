@@ -14,9 +14,9 @@ public class MyServer {
 
     public MyServer() {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            authService = new BaseAuthService();
-            authService.start();
-            clients = new ArrayList<>();
+            //authService = new BaseAuthService();
+            //authService.start();
+            //clients = new ArrayList<>();
             while (true) {
                 System.out.println("Ожидаем поключение клиентов");
                 Socket socket = serverSocket.accept();
@@ -66,11 +66,12 @@ public class MyServer {
     }
 
     public synchronized boolean isNickBusy(String nick) {
-        for (ClientHandler client : clients) {
+        /*for (ClientHandler client : clients) {
             if (nick.equals(client.getNick())) {
                 return true;
             }
-        }
+        }*/
+
         return false;
     }
 

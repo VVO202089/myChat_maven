@@ -4,7 +4,16 @@ public class AuthMessage {
     private String login;
     private String password;
     private String nick;
+    private String messageUser;
     private boolean authenticated = false;
+
+    public String getMessageUser() {
+        return messageUser;
+    }
+
+    public void setMessageUser(String messageUser) {
+        this.messageUser = messageUser;
+    }
 
     public String getLogin() {
         return login;

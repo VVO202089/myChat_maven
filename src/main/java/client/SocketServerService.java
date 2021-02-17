@@ -9,6 +9,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SocketServerService implements ServerService {
 
@@ -32,7 +34,7 @@ public class SocketServerService implements ServerService {
         }
     }
 
-    public String authorization(String login, String password) throws IOException {
+    public Map<Integer,String> authorization(String login, String password) throws IOException {
         AuthMessage authMessage = new AuthMessage();
         authMessage.setLogin(login);
         authMessage.setPassword(password);
@@ -42,7 +44,12 @@ public class SocketServerService implements ServerService {
         if (authMessage.isAuthenticated()) {
             isConnected = true;
         }
-        return authMessage.getNick();
+
+        Map<Integer,String> result = new HashMap<>();
+        result.put(1,authMessage.getNick());
+        result.put(2,authMessage.getMessageUser());
+
+        return result;
     }
 
     @Override

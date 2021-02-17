@@ -1,24 +1,26 @@
 package client;
 
 import server.Message;
-import server.Registration;
+import server.Registration_Authorization;
 
-import javax.accessibility.AccessibleRole;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Map;
 
 public class MyClient extends JFrame {
 
     private ServerService serverService;
-    private final  String   TITLE_message = "Окно сообщения";
+    private final String TITLE_message = "Окно сообщения";
+    private boolean userOnline;
+    private boolean swapUsers;
+    private String swapLogin;
 
     public MyClient() {
         super("Чат");
-        serverService = new SocketServerService();
-        serverService.openConnection();
+        //serverService = new SocketServerService();
+        //serverService.openConnection();
         JPanel jPanel = new JPanel();
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.X_AXIS));
@@ -39,19 +41,23 @@ public class MyClient extends JFrame {
         myMessage.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent keyEvent) {
+
                 if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-                    sendMessage(myMessage);
+                    if (userOnline) {
+                        sendMessage(myMessage);
+                        if (userOnline) {
+                            new Thread(() -> {
+                                while (true) {
+                                    printToUI(mainChat, serverService.readMessages());
+                                }
+                            }).start();
+                        }
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Пользователь не авторизован");
+                    }
                 }
             }
         });
-
-        if (serverService.isConnected()) {
-            new Thread(() -> {
-                while (true) {
-                    printToUI(mainChat, serverService.readMessages());
-                }
-            }).start();
-        }
 
         add(mainChat);
         jPanel.add(send);
@@ -59,56 +65,77 @@ public class MyClient extends JFrame {
         add(jPanel);
     }
 
+    private void sendMessage(JTextField myMessage) {
+
+        serverService.sendMessage(myMessage.getText());
+        myMessage.setText("");
+
+    }
+
     private void initLoginPanel(JTextArea mainChat) {
+
+        JPanel panel = new JPanel();
+        JPanel panelLogin = new JPanel();
+        JPanel panelButton = new JPanel();
+
+        panelLogin.setLayout(new BoxLayout(panelLogin, BoxLayout.Y_AXIS));
+        panelLogin.setSize(300, 50);
+        panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.X_AXIS));
+        panelButton.setSize(300, 50);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setSize(300, 50);
+
         JTextField login = new JTextField();
         login.setToolTipText("Логин");
         JPasswordField password = new JPasswordField();
         password.setToolTipText("Пароль");
         JButton regButton = new JButton("Регистрация");
         JButton authButton = new JButton("Авторизоваться");
+        JButton swapButton = new JButton("Сменить ник");
+        JButton quitButton = new JButton("Выйти");
+        JLabel authLabel = new JLabel("Offline");
 
         // регистрация
-        regButton.addActionListener(actionEvent ->{
+        regButton.addActionListener(actionEvent -> {
             String lgn = login.getText();
             String psw = new String(password.getPassword());
 
-            if(lgn!=null && psw!=null && !lgn.isEmpty() && !psw.isEmpty()){
-                Registration reg = new Registration(lgn,psw);
+            if (lgn != null && psw != null && !lgn.isEmpty() && !psw.isEmpty()) {
+                Registration_Authorization reg = new Registration_Authorization(lgn, psw);
                 reg.registrationUsers();
-            }
+                userOnline = reg.isRegistration();
 
+                if (reg.getMessageUser() != "") {
+                    JOptionPane.showMessageDialog(null, reg.getMessageUser());
+                }
+
+                serverService = new SocketServerService();
+                serverService.openConnection();
+                authLabel.setText(lgn.concat((reg.isRegistration()) ? " online" : " offline"));
+
+            }
         });
 
-        JLabel authLabel = new JLabel("Offline");
         // авторизация
         authButton.addActionListener(actionEvent -> {
             String lgn = login.getText();
             String psw = new String(password.getPassword());
             if (lgn != null && psw != null && !lgn.isEmpty() && !psw.isEmpty()) {
                 try {
-                    String nick = serverService.authorization(lgn, psw);
-                    authLabel.setText("Online, nick "+nick);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    // выход из приложения
-                    //String errorText = "Время для авторизации истекло";
-                    //int result = JOptionPane.showInternalConfirmDialog(MyClient.this,
-                    //                                errorText, TITLE_message,
-                    //                                JOptionPane.INFORMATION_MESSAGE);
-
-                    //if (result == 1) {
-                    //    System.exit(0);
-                    //}
-                    System.exit(0);
-                    return;
-                } finally {
-                    if (!serverService.isConnected()){
-                        serverService.closeConnection();
-                        System.exit(0);
-                        return;
+                    Registration_Authorization authorization = new Registration_Authorization(lgn, psw);
+                    authorization.authorizationUsers();
+                    userOnline = authorization.isAutorization();
+                    if (authorization.getMessageUser() != "") {
+                        JOptionPane.showMessageDialog(null, authorization.getMessageUser());
                     }
-
+                    serverService = new SocketServerService();
+                    serverService.openConnection();
+                    authLabel.setText(lgn.concat((authorization.isAutorization()) ? " online" : " offline"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.exit(0);
                 }
+
                 new Thread(() -> {
                     while (true) {
                         printToUI(mainChat, serverService.readMessages());
@@ -117,18 +144,55 @@ public class MyClient extends JFrame {
             }
         });
 
+        // выйти из пользователя
+        quitButton.addActionListener(actionEvent -> {
+            serverService = new SocketServerService();
+            serverService.closeConnection();
+            login.setText("");
+            password.setText("");
+            authLabel.setText("offline");
+        });
+
+        // сменить ник
+        swapButton.addActionListener(actionEvent -> {
+            String lgn = login.getText();
+            if (lgn != null && !lgn.isEmpty()) {
+                String mess = "Введите новый логин";
+                String newLogin = JOptionPane.showInputDialog(MyClient.this, mess);
+                // Обработка введенного логина
+                Registration_Authorization swap = new Registration_Authorization(newLogin, "");
+                swap.swapUsers(login.getText());
+                swapUsers = swap.isSwapUsers();
+                if (swap.getMessageUser() != "") {
+                    JOptionPane.showMessageDialog(null, swap.getMessageUser());
+                    if (swapUsers) {
+                        login.setText(swap.getLogin());
+                        JOptionPane.getRootFrame().dispose();
+                    }
+                }
+                authLabel.setText(login.getText().concat((swapUsers) ? " online" : " offline"));
+            }
+        });
+
         // добавление элементов на форму
-        add(login);
+        panelLogin.add(login);
+        panelLogin.add(password);
+        panelButton.add(regButton);
+        panelButton.add(authButton);
+        panelButton.add(swapButton);
+        panelButton.add(quitButton);
+        panel.add(panelLogin);
+        panel.add(panelButton);
+        add(panel);
+        add(authLabel);
+        /*add(login);
         add(password);
         add(regButton);
         add(authButton);
-        add(authLabel);
+        add(swapButton);
+        add(quitButton);
+        add(authLabel);*/
 
-    }
-
-    private void sendMessage(JTextField myMessage) {
-        serverService.sendMessage(myMessage.getText());
-        myMessage.setText("");
     }
 
     private void printToUI(JTextArea mainChat, Message message) {

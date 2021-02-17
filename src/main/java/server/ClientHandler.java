@@ -22,8 +22,9 @@ public class ClientHandler {
             this.socket = socket;
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            // комментируем
             // д.з 8 урок
-            new Thread(() ->{
+            /*new Thread(() ->{
                 try {
                     Thread.sleep(120000); // усыпляем на 120 сек
                     // если авторизация не прошла, тогда закрываем соединение
@@ -36,9 +37,11 @@ public class ClientHandler {
                     closeConnection();
                     return;
                 }
-            }).start();
-            new Thread(() -> {
+            }).start();*/
+
+            //new Thread(() -> {
                 try {
+                    // авторизация происходит через БД
                     authentication();
                     readMessages();
                 } catch (IOException e) {
@@ -47,7 +50,7 @@ public class ClientHandler {
                 } finally {
                     closeConnection();
                 }
-            }).start();
+           // }).start();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,7 +60,7 @@ public class ClientHandler {
     private void closeConnection() {
         myServer.unsubscribe(this);
         Message message = new Message();
-        message.setMessage(nick+" вышел из чата");
+        message.setMessage(nick + " вышел из чата");
         myServer.broadcastMessage(message);
         try {
             dataOutputStream.close();
@@ -73,9 +76,11 @@ public class ClientHandler {
             try {
                 AuthMessage message = new Gson().fromJson(dataInputStream.readUTF(), AuthMessage.class);
                 String nick = myServer.getAuthService().getNickByLoginAndPass(message.getLogin(), message.getPassword());
-                if (nick != null && !myServer.isNickBusy(nick)) {
+                //if (nick != null && !myServer.isNickBusy(nick)) {
+                if (nick != null) {
                     message.setAuthenticated(true);
                     message.setNick(nick);
+                    message.setMessageUser("Авторизация прошла успешно");
                     this.nick = nick;
                     dataOutputStream.writeUTF(new Gson().toJson(message));
                     Message broadcastMsg = new Message();
@@ -85,7 +90,13 @@ public class ClientHandler {
                     this.nick = nick;
                     isAuthentification = true;
                     return;
+                }else{
+                    message.setMessageUser("Ошибка при авторизации");
+                    message.setAuthenticated(false);
+                    isAuthentification = false;
+                    return;
                 }
+
             } catch (IOException ignored) {
             }
         }
@@ -103,10 +114,10 @@ public class ClientHandler {
             // /<command> <message>
             String[] tokens = message.getMessage().split("\\s");
             switch (tokens[0]) {
-                case "/end":{
+                case "/end": {
                     return;
                 }
-                case "/w":{// /w <nick> <message>
+                case "/w": {// /w <nick> <message>
                     if (tokens.length < 3) {
                         Message msg = new Message();
                         msg.setMessage("Не хватает параметров, необходимо отправить команду следующего вида: /w <ник> <сообщение>");
