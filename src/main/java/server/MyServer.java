@@ -7,21 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyServer {
-    public static final int PORT = 8081;
+    public static final int PORT = 8082;
 
     private List<ClientHandler> clients;
     private AuthService authService;
+    private String nick;
 
     public MyServer() {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             //authService = new BaseAuthService();
             //authService.start();
-            //clients = new ArrayList<>();
+            clients = new ArrayList<>();
             while (true) {
                 System.out.println("Ожидаем поключение клиентов");
                 Socket socket = serverSocket.accept();
                 System.out.println("Клиент подключился");
-                new ClientHandler(this, socket);
+                new ClientHandler(this, socket,nick);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -30,6 +31,14 @@ public class MyServer {
                 authService.stop();
             }
         }
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 
     public synchronized void broadcastClientsList() {

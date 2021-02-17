@@ -1,5 +1,6 @@
 package client;
 
+import server.AuthMessage;
 import server.Message;
 import server.Registration_Authorization;
 
@@ -19,8 +20,8 @@ public class MyClient extends JFrame {
 
     public MyClient() {
         super("Чат");
-        //serverService = new SocketServerService();
-        //serverService.openConnection();
+        serverService = new SocketServerService();
+        serverService.openConnection();
         JPanel jPanel = new JPanel();
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.X_AXIS));
@@ -108,9 +109,15 @@ public class MyClient extends JFrame {
                 if (reg.getMessageUser() != "") {
                     JOptionPane.showMessageDialog(null, reg.getMessageUser());
                 }
+                // теперь мы должны отправить сообщение к серверу, чтобы он отправил всем клиентам
+                try {
+                    if (userOnline) {
+                        serverService.authorization(lgn, psw);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                serverService = new SocketServerService();
-                serverService.openConnection();
                 authLabel.setText(lgn.concat((reg.isRegistration()) ? " online" : " offline"));
 
             }
@@ -128,8 +135,14 @@ public class MyClient extends JFrame {
                     if (authorization.getMessageUser() != "") {
                         JOptionPane.showMessageDialog(null, authorization.getMessageUser());
                     }
-                    serverService = new SocketServerService();
-                    serverService.openConnection();
+                    // теперь мы должны отправить сообщение к серверу, чтобы он отправил всем клиентам
+                    try {
+                        if (userOnline) {
+                            serverService.authorization(lgn, psw);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     authLabel.setText(lgn.concat((authorization.isAutorization()) ? " online" : " offline"));
                 } catch (Exception e) {
                     e.printStackTrace();

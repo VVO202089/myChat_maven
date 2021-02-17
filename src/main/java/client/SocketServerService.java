@@ -34,22 +34,20 @@ public class SocketServerService implements ServerService {
         }
     }
 
-    public Map<Integer,String> authorization(String login, String password) throws IOException {
+    public void authorization(String login, String password) throws IOException {
         AuthMessage authMessage = new AuthMessage();
         authMessage.setLogin(login);
         authMessage.setPassword(password);
         dataOutputStream.writeUTF(new Gson().toJson(authMessage));
 
         authMessage = new Gson().fromJson(dataInputStream.readUTF(), AuthMessage.class);
-        if (authMessage.isAuthenticated()) {
+        /*if (authMessage.isAuthenticated()) {
             isConnected = true;
         }
 
         Map<Integer,String> result = new HashMap<>();
         result.put(1,authMessage.getNick());
-        result.put(2,authMessage.getMessageUser());
-
-        return result;
+        result.put(2,authMessage.getMessageUser());*/
     }
 
     @Override

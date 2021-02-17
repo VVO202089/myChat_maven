@@ -19,16 +19,16 @@ public class BaseAuthService implements AuthService {
         return messageUser;
     }
 
-    //private List<Entry> entries;
+    private List<Entry> entries;
 
-  /*  public BaseAuthService() {
+    public BaseAuthService() {
         entries = new ArrayList<>();
         entries.add(new Entry("ivan", "1", "Neivanov"));
         entries.add(new Entry("sharik", "2", "Auf"));
         entries.add(new Entry("otvertka", "3", "Kruchu-verchu"));
-    }*/
+    }
 
-    /*private class Entry {
+    private class Entry {
         private String login;
         private String password;
         private String nick;
@@ -38,7 +38,7 @@ public class BaseAuthService implements AuthService {
             this.password = password;
             this.nick = nick;
         }
-    }*/
+    }
 
     @Override
     public void start() {
@@ -52,44 +52,10 @@ public class BaseAuthService implements AuthService {
 
     @Override
     public String getNickByLoginAndPass(String login, String password) {
-        /*for (Entry entry : entries) {
+        for (Entry entry : entries) {
             if (login.equals(entry.login) && password.equals(entry.password)) {
                 return entry.nick;
             }
-        } */
-        // проверим, если пользователь в базе
-        String query = "SELECT login FROM table_users WHERE login = '".concat(login).concat("' AND password = '").concat(password).concat("'");
-
-        try {
-            Class.forName(driverName);
-        } catch (ClassNotFoundException e) {
-            messageUser = "Не могу получить драйвер";
-            e.printStackTrace();
-            return null;
-        }
-
-        try {
-            connection = DriverManager.getConnection(connectionString,"root","Zorg123!!!");
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(query);
-
-            if (resultSet.next()){
-                // так как в результате будет одна строка
-                return resultSet.getString("login");
-            }else {
-                return null;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            messageUser = "Ошибка при закрытии соединения";
-            e.printStackTrace();
-            return null;
         }
         return null;
     }

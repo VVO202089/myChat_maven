@@ -16,12 +16,13 @@ public class ClientHandler {
     private String nick;
     private boolean isAuthentification = false;
 
-    public ClientHandler(MyServer myServer, Socket socket) {
+    public ClientHandler(MyServer myServer, Socket socket, String nick) {
         try {
             this.myServer = myServer;
             this.socket = socket;
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            this.nick = nick;
             // комментируем
             // д.з 8 урок
             /*new Thread(() ->{
@@ -42,7 +43,7 @@ public class ClientHandler {
             //new Thread(() -> {
                 try {
                     // авторизация происходит через БД
-                    //authentication();
+                    authentication();
                     readMessages();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -75,12 +76,13 @@ public class ClientHandler {
         while (true) {
             try {
                 AuthMessage message = new Gson().fromJson(dataInputStream.readUTF(), AuthMessage.class);
-                String nick = myServer.getAuthService().getNickByLoginAndPass(message.getLogin(), message.getPassword());
+                String nick = message.getLogin();
+                //String nick = myServer.getAuthService().getNickByLoginAndPass(message.getLogin(), message.getPassword());
                 //if (nick != null && !myServer.isNickBusy(nick)) {
-                if (nick != null) {
+                if (nick != null && !nick.isEmpty()) {
                     message.setAuthenticated(true);
                     message.setNick(nick);
-                    message.setMessageUser("Авторизация прошла успешно");
+                    //message.setMessageUser("Авторизация прошла успешно");
                     this.nick = nick;
                     dataOutputStream.writeUTF(new Gson().toJson(message));
                     Message broadcastMsg = new Message();
@@ -91,7 +93,7 @@ public class ClientHandler {
                     isAuthentification = true;
                     return;
                 }else{
-                    message.setMessageUser("Ошибка при авторизации");
+                    //message.setMessageUser("Ошибка при авторизации");
                     message.setAuthenticated(false);
                     isAuthentification = false;
                     return;
