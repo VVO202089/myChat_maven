@@ -42,7 +42,7 @@ public class ClientHandler {
             //new Thread(() -> {
                 try {
                     // авторизация происходит через БД
-                    authentication();
+                    //authentication();
                     readMessages();
                 } catch (IOException e) {
                     e.printStackTrace();
