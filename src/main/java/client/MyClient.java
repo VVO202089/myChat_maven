@@ -31,16 +31,16 @@ public class MyClient extends JFrame {
         // общая панель
         JPanel jPanel = new JPanel();
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.X_AXIS));
+        //jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
         jPanel.setSize(300, 50);
         // панель myMessage
         JPanel myMessagePanel = new JPanel();
-        setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
-        myMessagePanel.setSize(100,70);
+        myMessagePanel.setLayout(new BoxLayout(myMessagePanel,BoxLayout.Y_AXIS));
+        myMessagePanel.setSize(100,200);
         // панель history
         JPanel historyPanel = new JPanel();
-        setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
-        myMessagePanel.setSize(70,70);
+        historyPanel.setLayout(new BoxLayout(historyPanel,BoxLayout.Y_AXIS));
+        myMessagePanel.setSize(100,200);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(400, 400, 500, 300);
@@ -127,11 +127,11 @@ public class MyClient extends JFrame {
         JPanel panelLogin = new JPanel();
         JPanel panelButton = new JPanel();
 
-        panelLogin.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        panelLogin.setLayout(new BoxLayout(panelLogin, BoxLayout.Y_AXIS));
         panelLogin.setSize(300, 50);
-        panelButton.setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
+        panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.X_AXIS));
         panelButton.setSize(300, 50);
-        panel.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setSize(300, 50);
 
         JTextField login = new JTextField();
