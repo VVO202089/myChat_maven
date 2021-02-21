@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class MyClient extends JFrame {
@@ -17,26 +19,43 @@ public class MyClient extends JFrame {
     private boolean userOnline;
     private boolean swapUsers;
     private String swapLogin;
+    private final String PATH = "D://JAVA база/";
+    private String loginPath = "";
+    private String historyUser = "";
+    private JTextField textFieldHistory = new JTextField();
 
     public MyClient() {
         super("Чат");
         serverService = new SocketServerService();
         serverService.openConnection();
+        // общая панель
         JPanel jPanel = new JPanel();
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.X_AXIS));
         jPanel.setSize(300, 50);
+        // панель myMessage
+        JPanel myMessagePanel = new JPanel();
+        setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
+        myMessagePanel.setSize(100,70);
+        // панель history
+        JPanel historyPanel = new JPanel();
+        setLayout(new BoxLayout(getContentPane(),BoxLayout.Y_AXIS));
+        myMessagePanel.setSize(70,70);
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(400, 400, 500, 300);
 
+        JLabel lbMainChat = new JLabel("Общее окно");
         JTextArea mainChat = new JTextArea();
         mainChat.setSize(400, 250);
 
         initLoginPanel(mainChat);
 
+        JLabel lbMymessage = new JLabel("Введите сообщение");
+        JLabel lbHistory = new JLabel("История сообщений");
         JTextField myMessage = new JTextField();
+        JButton send = new JButton("Отправить сообщение");
 
-        JButton send = new JButton("Send");
         send.addActionListener(actionEvent -> sendMessage(myMessage));
 
         myMessage.addKeyListener(new KeyAdapter() {
@@ -45,7 +64,10 @@ public class MyClient extends JFrame {
 
                 if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (userOnline) {
+                        // отправка сообщения
                         sendMessage(myMessage);
+                        // логирование сообщений
+                        saveMessage(myMessage);
                         if (userOnline) {
                             new Thread(() -> {
                                 while (true) {
@@ -60,10 +82,21 @@ public class MyClient extends JFrame {
             }
         });
 
+        add(lbMainChat);
         add(mainChat);
+        myMessagePanel.add(lbMymessage);
+        myMessagePanel.add(myMessage);
+        historyPanel.add(lbHistory);
+        historyPanel.add(textFieldHistory);
         jPanel.add(send);
-        jPanel.add(myMessage);
+        jPanel.add(myMessagePanel);
+        jPanel.add(historyPanel);
         add(jPanel);
+    }
+
+    private void saveMessage(JTextField myMessage) {
+        String fullPATH = PATH.concat("history_").concat(loginPath).concat(".txt");
+        serverService.saveMessage(myMessage.getText(),fullPATH);
     }
 
     private void sendMessage(JTextField myMessage) {
@@ -73,17 +106,32 @@ public class MyClient extends JFrame {
 
     }
 
+    private void loadHistory() {
+        String fullPATH = PATH.concat("history_").concat(loginPath).concat(".txt");
+        // получаем только последние 100 строк из истории
+        List<String> listHistory = serverService.loadHistory(fullPATH,100);
+        StringBuilder sbHistory = new StringBuilder();
+
+        Iterator iterator = listHistory.listIterator();
+
+        while (iterator.hasNext()){
+            sbHistory.append(iterator.next());
+        }
+
+        textFieldHistory.setText(sbHistory.toString());
+    }
+
     private void initLoginPanel(JTextArea mainChat) {
 
         JPanel panel = new JPanel();
         JPanel panelLogin = new JPanel();
         JPanel panelButton = new JPanel();
 
-        panelLogin.setLayout(new BoxLayout(panelLogin, BoxLayout.Y_AXIS));
+        panelLogin.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         panelLogin.setSize(300, 50);
-        panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.X_AXIS));
+        panelButton.setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
         panelButton.setSize(300, 50);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         panel.setSize(300, 50);
 
         JTextField login = new JTextField();
@@ -119,6 +167,7 @@ public class MyClient extends JFrame {
                 }
 
                 authLabel.setText(lgn.concat((reg.isRegistration()) ? " online" : " offline"));
+                loginPath = lgn;
 
             }
         });
@@ -144,6 +193,7 @@ public class MyClient extends JFrame {
                         e.printStackTrace();
                     }
                     authLabel.setText(lgn.concat((authorization.isAutorization()) ? " online" : " offline"));
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.exit(0);
@@ -154,6 +204,9 @@ public class MyClient extends JFrame {
                         printToUI(mainChat, serverService.readMessages());
                     }
                 }).start();
+                loginPath = lgn;
+                // загрузим последние 100 строк истории чата
+                loadHistory();
             }
         });
 
@@ -164,6 +217,7 @@ public class MyClient extends JFrame {
             login.setText("");
             password.setText("");
             authLabel.setText("offline");
+            loginPath = "";
         });
 
         // сменить ник
@@ -184,6 +238,7 @@ public class MyClient extends JFrame {
                     }
                 }
                 authLabel.setText(login.getText().concat((swapUsers) ? " online" : " offline"));
+                loginPath = newLogin;
             }
         });
 

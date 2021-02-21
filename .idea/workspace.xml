@@ -22,14 +22,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb3767e2-2f74-4aa7-922f-8f42bcd045ed" name="Default Changelist" comment="lesson_2">
+    <list default="true" id="cb3767e2-2f74-4aa7-922f-8f42bcd045ed" name="Default Changelist" comment="lesson_error">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/MyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/MyClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/ServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/ServerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/SocketServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/SocketServerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/BaseAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/BaseAuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/MyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/MyServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +45,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="lesson2_reg" />
+        <entry key="$PROJECT_DIR$" value="lesson2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,7 +71,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myChat_maven_correct" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -147,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613540944491</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="lesson_error">
+      <created>1613585623437</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1613585623437</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -165,7 +170,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="error_reg" />
     <MESSAGE value="lesson_2" />
-    <option name="LAST_COMMIT_MESSAGE" value="lesson_2" />
+    <MESSAGE value="lesson_error" />
+    <option name="LAST_COMMIT_MESSAGE" value="lesson_error" />
   </component>
   <component name="WindowStateProjectService">
     <state x="313" y="44" key="#Inspections" timestamp="1613143466255">
@@ -184,11 +190,15 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="142" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612244398304" />
-    <state x="492" y="82" key="#com.intellij.ide.util.MemberChooser" timestamp="1613578048149">
+    <state x="492" y="82" key="#com.intellij.ide.util.MemberChooser" timestamp="1613753821065">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="492" y="82" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613578048149" />
+    <state x="492" y="82" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613753821065" />
     <state x="492" y="82" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1613498800942" />
+    <state x="470" y="235" width="425" height="304" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1613586544871">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="470" y="235" width="425" height="304" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613586544871" />
     <state x="470" y="175" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog" timestamp="1613416719573">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -206,10 +216,10 @@
     </state>
     <state x="109" y="42" key="DBNavigator.ProjectSettingsDialog/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613585408808" />
     <state x="109" y="42" key="DBNavigator.ProjectSettingsDialog/0.0.1366.728@0.0.1366.728" timestamp="1613415693922" />
-    <state x="467" y="107" key="FileChooserDialogImpl" timestamp="1613143117861">
+    <state x="467" y="107" key="FileChooserDialogImpl" timestamp="1613755691352">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="467" y="107" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613143117861" />
+    <state x="467" y="107" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613755691352" />
     <state x="551" y="264" key="Github.ShareDialog" timestamp="1612283001862">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -218,54 +228,54 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="444" y="64" key="Github.UntrackedFilesDialog/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612283018962" />
-    <state width="1323" height="152" key="GridCell.Tab.0.bottom" timestamp="1613585492299">
+    <state width="1323" height="152" key="GridCell.Tab.0.bottom" timestamp="1613899500433">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="152" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613585492299" />
-    <state width="1323" height="199" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613506948273" />
-    <state width="1323" height="152" key="GridCell.Tab.0.center" timestamp="1613585492298">
+    <state width="1323" height="196" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613757341579" />
+    <state width="1323" height="152" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613899500433" />
+    <state width="1323" height="152" key="GridCell.Tab.0.center" timestamp="1613899500433">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="152" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613585492298" />
-    <state width="1323" height="199" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1613506948273" />
-    <state width="1323" height="152" key="GridCell.Tab.0.left" timestamp="1613585492298">
+    <state width="1323" height="196" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613757341579" />
+    <state width="1323" height="152" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1613899500433" />
+    <state width="1323" height="152" key="GridCell.Tab.0.left" timestamp="1613899500433">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="152" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613585492298" />
-    <state width="1323" height="199" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1613506948272" />
-    <state width="1323" height="152" key="GridCell.Tab.0.right" timestamp="1613585492298">
+    <state width="1323" height="196" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613757341579" />
+    <state width="1323" height="152" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1613899500433" />
+    <state width="1323" height="152" key="GridCell.Tab.0.right" timestamp="1613899500433">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="152" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613585492298" />
-    <state width="1323" height="199" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1613506948273" />
-    <state width="1323" height="200" key="GridCell.Tab.1.bottom" timestamp="1613584252122">
+    <state width="1323" height="196" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613757341579" />
+    <state width="1323" height="152" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1613899500433" />
+    <state width="1323" height="196" key="GridCell.Tab.1.bottom" timestamp="1613899322485">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="200" key="GridCell.Tab.1.bottom/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613584252122" />
-    <state width="1323" height="199" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613506948273" />
-    <state width="1323" height="200" key="GridCell.Tab.1.center" timestamp="1613584252122">
+    <state width="1323" height="196" key="GridCell.Tab.1.bottom/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613757341579" />
+    <state width="1323" height="196" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1613899322485" />
+    <state width="1323" height="196" key="GridCell.Tab.1.center" timestamp="1613899322484">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="200" key="GridCell.Tab.1.center/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613584252122" />
-    <state width="1323" height="199" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1613506948273" />
-    <state width="1323" height="200" key="GridCell.Tab.1.left" timestamp="1613584252122">
+    <state width="1323" height="196" key="GridCell.Tab.1.center/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613757341579" />
+    <state width="1323" height="196" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1613899322484" />
+    <state width="1323" height="196" key="GridCell.Tab.1.left" timestamp="1613899322484">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="200" key="GridCell.Tab.1.left/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613584252122" />
-    <state width="1323" height="199" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1613506948273" />
-    <state width="1323" height="200" key="GridCell.Tab.1.right" timestamp="1613584252122">
+    <state width="1323" height="196" key="GridCell.Tab.1.left/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613757341579" />
+    <state width="1323" height="196" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1613899322484" />
+    <state width="1323" height="196" key="GridCell.Tab.1.right" timestamp="1613899322485">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="200" key="GridCell.Tab.1.right/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613584252122" />
-    <state width="1323" height="199" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1613506948273" />
+    <state width="1323" height="196" key="GridCell.Tab.1.right/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613757341579" />
+    <state width="1323" height="196" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1613899322485" />
     <state x="188" y="0" key="SettingsEditor" timestamp="1613144311972">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="188" y="0" key="SettingsEditor/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613144311972" />
-    <state x="279" y="99" key="Vcs.Push.Dialog.v2" timestamp="1613540968458">
+    <state x="279" y="99" key="Vcs.Push.Dialog.v2" timestamp="1613585636797">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="279" y="99" key="Vcs.Push.Dialog.v2/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613540968458" />
+    <state x="279" y="99" key="Vcs.Push.Dialog.v2/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613585636797" />
     <state x="412" y="258" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1613142950094">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -274,10 +284,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="69" y="27" key="new project wizard/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612543026261" />
-    <state x="343" y="164" key="run.anything.popup" timestamp="1613209696447">
+    <state x="343" y="164" key="run.anything.popup" timestamp="1613753229060">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="343" y="164" key="run.anything.popup/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1612281545532" />
+    <state x="343" y="164" key="run.anything.popup/0.0.1366.728/1366.0.1280.984@0.0.1366.728" timestamp="1613753229060" />
     <state x="343" y="164" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1613209696447" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613506148839">
       <screen x="0" y="0" width="1366" height="728" />
@@ -289,29 +299,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/client/MyClient.java</url>
-          <line>211</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/client/SocketServerService.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/server/MyServer.java</url>
-          <line>71</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/MyServer.java</url>
           <line>96</line>
           <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/client/MyClient.java</url>
-          <line>127</line>
-          <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/server/ClientHandler.java</url>
@@ -324,9 +314,9 @@
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/server/MyServer.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="40" />
+          <url>file://$PROJECT_DIR$/src/main/java/client/MyClient.java</url>
+          <line>253</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

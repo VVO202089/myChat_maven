@@ -40,7 +40,7 @@ public class ClientHandler {
                 }
             }).start();*/
 
-            //new Thread(() -> {
+            new Thread(() -> {
                 try {
                     // авторизация происходит через БД
                     authentication();
@@ -51,7 +51,7 @@ public class ClientHandler {
                 } finally {
                     closeConnection();
                 }
-           // }).start();
+            }).start();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,7 +99,8 @@ public class ClientHandler {
                     return;
                 }
 
-            } catch (IOException ignored) {
+            } catch (IOException e) {
+                return;
             }
         }
     }

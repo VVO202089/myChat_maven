@@ -5,12 +5,15 @@ import server.AuthMessage;
 import server.Message;
 import server.MyServer;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SocketServerService implements ServerService {
 
@@ -62,6 +65,16 @@ public class SocketServerService implements ServerService {
     }
 
     @Override
+    public Message readMessages() {
+        try {
+            return new Gson().fromJson(dataInputStream.readUTF(), Message.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new Message();
+        }
+    }
+
+    @Override
     public void sendMessage(String message) {
         Message msg = new Message();
         msg.setMessage(message);
@@ -74,12 +87,37 @@ public class SocketServerService implements ServerService {
     }
 
     @Override
-    public Message readMessages() {
+    public void saveMessage(String message, String fullPATH) {
+
         try {
-            return new Gson().fromJson(dataInputStream.readUTF(), Message.class);
+
+            File history = new File(fullPATH);
+            if (!history.exists()){
+                history.createNewFile();
+            }
+
+            PrintWriter fileWriter = new PrintWriter(new FileWriter(history,true));
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write((message.concat("\n")));
+            bufferedWriter.close();
+
         } catch (IOException e) {
             e.printStackTrace();
-            return new Message();
         }
     }
+
+    @Override
+    public List<String> loadHistory(String fullPATH, int nLines) {
+
+        File history = new File(fullPATH);
+
+        try (Stream<String> stream = Files.lines(history.toPath())){
+            return stream.limit(nLines).collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+
+    }
+
 }
