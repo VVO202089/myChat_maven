@@ -22,7 +22,7 @@ public class MyClient extends JFrame {
     private final String PATH = "D://JAVA база/";
     private String loginPath = "";
     private String historyUser = "";
-    private JTextField textFieldHistory = new JTextField();
+    private JTextArea textFieldHistory = new JTextArea();
 
     public MyClient() {
         super("Чат");
@@ -32,22 +32,30 @@ public class MyClient extends JFrame {
         JPanel jPanel = new JPanel();
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         //jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
-        jPanel.setSize(300, 50);
-        // панель myMessage
-        JPanel myMessagePanel = new JPanel();
-        myMessagePanel.setLayout(new BoxLayout(myMessagePanel,BoxLayout.Y_AXIS));
-        myMessagePanel.setSize(100,200);
+        jPanel.setSize(400, 300);
+        // центральная чать окна
+        JPanel panelmain = new JPanel();
+        panelmain.setLayout(new BoxLayout(panelmain,BoxLayout.X_AXIS));
+        panelmain.setSize(200,200);
+        // панель с общим чатом
+        JPanel mainChatPanel = new JPanel();
+        mainChatPanel.setLayout(new BoxLayout(mainChatPanel,BoxLayout.Y_AXIS));
+        mainChatPanel.setSize(200,200);
         // панель history
         JPanel historyPanel = new JPanel();
         historyPanel.setLayout(new BoxLayout(historyPanel,BoxLayout.Y_AXIS));
-        myMessagePanel.setSize(100,200);
+        historyPanel.setSize(200,200);
+        // панель myMessage
+        JPanel myMessagePanel = new JPanel();
+        myMessagePanel.setLayout(new BoxLayout(myMessagePanel,BoxLayout.X_AXIS));
+        myMessagePanel.setSize(100,100);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(400, 400, 500, 300);
 
-        JLabel lbMainChat = new JLabel("Общее окно");
+        JLabel lbMainChat = new JLabel("Общее окно сообщений");
         JTextArea mainChat = new JTextArea();
-        mainChat.setSize(400, 250);
+        mainChat.setSize(400, 400);
 
         initLoginPanel(mainChat);
 
@@ -82,28 +90,32 @@ public class MyClient extends JFrame {
             }
         });
 
-        add(lbMainChat);
-        add(mainChat);
-        myMessagePanel.add(lbMymessage);
-        myMessagePanel.add(myMessage);
+        // панель с чатом
+        mainChatPanel.add(lbMainChat);
+        mainChatPanel.add(mainChat);
+        // панель с историей чата
         historyPanel.add(lbHistory);
         historyPanel.add(textFieldHistory);
-        jPanel.add(send);
-        jPanel.add(myMessagePanel);
-        jPanel.add(historyPanel);
-        add(jPanel);
+        //добавление полей в центр окна
+        panelmain.add(mainChatPanel);
+        panelmain.add(historyPanel);
+        // добавление в подвал
+        myMessagePanel.add(myMessage);
+        myMessagePanel.add(send);
+        // добавление панелей на форму
+        add(panelmain);
+        add(myMessagePanel);
+        //add(jPanel);
     }
 
     private void saveMessage(JTextField myMessage) {
         String fullPATH = PATH.concat("history_").concat(loginPath).concat(".txt");
         serverService.saveMessage(myMessage.getText(),fullPATH);
+        myMessage.setText("");
     }
 
     private void sendMessage(JTextField myMessage) {
-
         serverService.sendMessage(myMessage.getText());
-        myMessage.setText("");
-
     }
 
     private void loadHistory() {
@@ -115,10 +127,13 @@ public class MyClient extends JFrame {
         Iterator iterator = listHistory.listIterator();
 
         while (iterator.hasNext()){
-            sbHistory.append(iterator.next());
+            sbHistory.append(iterator.next() + "\r\n");
         }
 
-        textFieldHistory.setText(sbHistory.toString());
+        String history = sbHistory.toString();
+        history.replace("\r\n","<br/>");
+
+        textFieldHistory.setText(history);
     }
 
     private void initLoginPanel(JTextArea mainChat) {
@@ -212,8 +227,8 @@ public class MyClient extends JFrame {
 
         // выйти из пользователя
         quitButton.addActionListener(actionEvent -> {
-            serverService = new SocketServerService();
-            serverService.closeConnection();
+            //serverService = new SocketServerService();
+            //serverService.closeConnection();
             login.setText("");
             password.setText("");
             authLabel.setText("offline");
