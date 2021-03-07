@@ -3,6 +3,15 @@ package server;
 public class Message {
     private String nick;
     private String message;
+    private boolean quitUser;
+
+    public boolean isQuitUser() {
+        return quitUser;
+    }
+
+    public void setQuitUser(boolean quitUser) {
+        this.quitUser = quitUser;
+    }
 
     public String getNick() {
         return nick;

@@ -19,7 +19,7 @@ public class MyClient extends JFrame {
     private boolean userOnline;
     private boolean swapUsers;
     private String swapLogin;
-    private final String PATH = "D://JAVA база/";
+    //private final String PATH = "D://JAVA/";
     private String loginPath = "";
     private String historyUser = "";
     private JTextArea textFieldHistory = new JTextArea();
@@ -109,7 +109,8 @@ public class MyClient extends JFrame {
     }
 
     private void saveMessage(JTextField myMessage) {
-        String fullPATH = PATH.concat("history_").concat(loginPath).concat(".txt");
+        //String fullPATH = PATH.concat("history_").concat(loginPath).concat(".txt");
+        String fullPATH = "history_".concat(loginPath).concat(".txt");
         serverService.saveMessage(myMessage.getText(),fullPATH);
         myMessage.setText("");
     }
@@ -119,7 +120,8 @@ public class MyClient extends JFrame {
     }
 
     private void loadHistory() {
-        String fullPATH = PATH.concat("history_").concat(loginPath).concat(".txt");
+        //String fullPATH = PATH.concat("history_").concat(loginPath).concat(".txt");
+        String fullPATH = "history_".concat(loginPath).concat(".txt");
         // получаем только последние 100 строк из истории
         List<String> listHistory = serverService.loadHistory(fullPATH,100);
         StringBuilder sbHistory = new StringBuilder();
@@ -175,7 +177,7 @@ public class MyClient extends JFrame {
                 // теперь мы должны отправить сообщение к серверу, чтобы он отправил всем клиентам
                 try {
                     if (userOnline) {
-                        serverService.authorization(lgn, psw);
+                        serverService.authorization(lgn, psw,false);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -202,7 +204,10 @@ public class MyClient extends JFrame {
                     // теперь мы должны отправить сообщение к серверу, чтобы он отправил всем клиентам
                     try {
                         if (userOnline) {
-                            serverService.authorization(lgn, psw);
+                            serverService.authorization(lgn, psw,false);
+                            //loginPath = lgn;
+                            // загрузим последние 100 строк истории чата
+                            //loadHistory();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -219,20 +224,30 @@ public class MyClient extends JFrame {
                         printToUI(mainChat, serverService.readMessages());
                     }
                 }).start();
-                loginPath = lgn;
-                // загрузим последние 100 строк истории чата
-                loadHistory();
+
+                if (userOnline){
+                    loginPath = lgn;
+                    // загрузим последние 100 строк истории чата
+                    loadHistory();
+                }
             }
         });
 
         // выйти из пользователя
         quitButton.addActionListener(actionEvent -> {
-            //serverService = new SocketServerService();
-            //serverService.closeConnection();
-            login.setText("");
-            password.setText("");
-            authLabel.setText("offline");
-            loginPath = "";
+            String lgn = login.getText();
+            String psw = new String(password.getPassword());
+            if (lgn != null && psw != null && !lgn.isEmpty() && !psw.isEmpty()) {
+                try {
+                    serverService.authorization(lgn,psw,true);
+                    login.setText("");
+                    password.setText("");
+                    authLabel.setText("offline");
+                    loginPath = "";
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
         // сменить ник
@@ -268,14 +283,6 @@ public class MyClient extends JFrame {
         panel.add(panelButton);
         add(panel);
         add(authLabel);
-        /*add(login);
-        add(password);
-        add(regButton);
-        add(authButton);
-        add(swapButton);
-        add(quitButton);
-        add(authLabel);*/
-
     }
 
     private void printToUI(JTextArea mainChat, Message message) {

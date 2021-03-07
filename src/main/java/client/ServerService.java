@@ -11,8 +11,7 @@ public interface ServerService {
     boolean isConnected();
     void openConnection();
     void closeConnection();
-    void authorization(String login, String password) throws IOException;
-
+    void authorization(String login, String password,boolean quit) throws IOException;
     void sendMessage(String message);
     void saveMessage(String message,String fullPATH);
     List<String> loadHistory(String fullPATH, int nLines);

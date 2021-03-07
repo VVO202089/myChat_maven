@@ -6,6 +6,15 @@ public class AuthMessage {
     private String nick;
     private String messageUser;
     private boolean authenticated = false;
+    private boolean isQuitUser;
+
+    public boolean isQuitUser() {
+        return isQuitUser;
+    }
+
+    public void setQuitUser(boolean quitUser) {
+        isQuitUser = quitUser;
+    }
 
     public String getMessageUser() {
         return messageUser;

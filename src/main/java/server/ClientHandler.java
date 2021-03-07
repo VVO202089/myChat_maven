@@ -6,6 +6,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class ClientHandler {
 
@@ -39,7 +42,6 @@ public class ClientHandler {
                     return;
                 }
             }).start();*/
-
             new Thread(() -> {
                 try {
                     // авторизация происходит через БД
@@ -77,12 +79,28 @@ public class ClientHandler {
             try {
                 AuthMessage message = new Gson().fromJson(dataInputStream.readUTF(), AuthMessage.class);
                 String nick = message.getLogin();
-                //String nick = myServer.getAuthService().getNickByLoginAndPass(message.getLogin(), message.getPassword());
-                //if (nick != null && !myServer.isNickBusy(nick)) {
+                // если команда "выйти из пользователя"
+                System.out.println("Выход " + message.isQuitUser());
+                if (message.isQuitUser()){
+                    List<ClientHandler> clients = myServer.getClients();
+
+                    // находим нужного клиента и его удаляем
+                    for (ClientHandler handler: clients) {
+                        if (handler.getNick() == nick){
+                            clients.remove(handler);
+                            System.out.println("Выход");
+                        }
+                    }
+                    dataOutputStream.writeUTF(new Gson().toJson(message));
+                    Message msg = new Message();
+                    msg.setMessage(nick + " вышел из чата");
+                    //myServer.broadcastMessage(msg);
+                    myServer.subscribe(this);
+                    return;
+                }
                 if (nick != null && !nick.isEmpty()) {
                     message.setAuthenticated(true);
                     message.setNick(nick);
-                    //message.setMessageUser("Авторизация прошла успешно");
                     this.nick = nick;
                     dataOutputStream.writeUTF(new Gson().toJson(message));
                     Message broadcastMsg = new Message();
@@ -92,8 +110,7 @@ public class ClientHandler {
                     this.nick = nick;
                     isAuthentification = true;
                     return;
-                }else{
-                    //message.setMessageUser("Ошибка при авторизации");
+                } else {
                     message.setAuthenticated(false);
                     isAuthentification = false;
                     return;
@@ -110,6 +127,7 @@ public class ClientHandler {
             Message message = new Gson().fromJson(dataInputStream.readUTF(), Message.class);
             message.setNick(nick);
             System.out.println(message);
+            // отправка личного сообщения
             if (!message.getMessage().startsWith("/")) {
                 myServer.broadcastMessage(message);
                 continue;
