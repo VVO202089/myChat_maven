@@ -43,7 +43,7 @@ public class SocketServerService implements ServerService {
         authMessage.setPassword(password);
         authMessage.setQuitUser(quit);
         dataOutputStream.writeUTF(new Gson().toJson(authMessage));
-        authMessage = new Gson().fromJson(dataInputStream.readUTF(), AuthMessage.class);
+        //authMessage = new Gson().fromJson(dataInputStream.readUTF(), AuthMessage.class);
     }
 
     @Override

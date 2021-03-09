@@ -1,3 +1,4 @@
+
 package server;
 
 import com.google.gson.Gson;
@@ -51,7 +52,7 @@ public class ClientHandler {
                     e.printStackTrace();
                     return;
                 } finally {
-                    closeConnection();
+                   closeConnection();
                 }
             }).start();
 

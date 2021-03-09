@@ -89,7 +89,9 @@ public class MyClient extends JFrame {
                 }
             }
         });
-
+        // запрет редактирования истории чата и общего окна чата
+        textFieldHistory.setEditable(false);
+        mainChat.setEditable(false);
         // панель с чатом
         mainChatPanel.add(lbMainChat);
         mainChatPanel.add(mainChat);
@@ -216,7 +218,7 @@ public class MyClient extends JFrame {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    System.exit(0);
+                    //System.exit(0);
                 }
 
                 new Thread(() -> {
@@ -238,15 +240,8 @@ public class MyClient extends JFrame {
             String lgn = login.getText();
             String psw = new String(password.getPassword());
             if (lgn != null && psw != null && !lgn.isEmpty() && !psw.isEmpty()) {
-                try {
-                    serverService.authorization(lgn,psw,true);
-                    login.setText("");
-                    password.setText("");
-                    authLabel.setText("offline");
-                    loginPath = "";
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                // выход из приложения
+                System.exit(0);
             }
         });
 
